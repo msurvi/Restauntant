@@ -22,7 +22,7 @@ public class UserAuthenticate {
 			Class.forName("com.mysql.jdbc.Driver");
 			passwordMD5 = EncryptMD5.cryptWithMD5(password);
 			conn = DriverManager.getConnection(DBHelper.dbHostName, DBHelper.userName, DBHelper.passWord);
-			query = conn.prepareStatement("select * from user where username = '" + userName + "' and password = '" + passwordMD5 +"';");
+			query = conn.prepareStatement("select * from users where Email = '" + userName + "' and password = '" + passwordMD5 +"';");
 			rs = query.executeQuery();
 			returnString = JsonBuilderHelper.jsonBuilder("status", "authfailed");
 			ResultSetMetaData rsmd = rs.getMetaData();
@@ -30,7 +30,7 @@ public class UserAuthenticate {
 			{
 				return returnString;
 			}
-			int flagNewUser = rs.getInt(rsmd.getColumnName(4));
+			int flagNewUser = rs.getInt(rsmd.getColumnName(10));
 			if(flagNewUser == 1)
 			{
 				return "1"; 

@@ -17,10 +17,10 @@ import restaurant.helpers.*;
 
 import com.sun.jersey.multipart.FormDataParam;
 
-@Path("/retrieve")
+@Path("/extract")
 public class ExtractData {
 
-	@Path("/getmenu")
+	@Path("/getmenulist")
 	@POST
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
 	public String returnDatabaseStatus(@FormDataParam("emailAddr") String userName,
@@ -42,12 +42,12 @@ public class ExtractData {
 				return returnString;
 			}
 			
-			Class.forName("com.mysql.jdbc.Driver");
+			//Class.forName("com.mysql.jdbc.Driver");
 			conn = DriverManager.getConnection(DBHelper.dbHostName,
 					DBHelper.userName, DBHelper.passWord);
 
 			returnString = null;
-			query = conn.prepareStatement("select * from menu");
+			query = conn.prepareStatement("select m.Mname, c.CategoryName, m.Price from menu m, category c where c.CategoryID = m.CategoryID and m.Active_Flag=1");
 			rs = query.executeQuery();
 
 			ToJson converter = new ToJson();
