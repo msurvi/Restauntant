@@ -16,8 +16,8 @@ import restaurant.helpers.DBHelper;
 import restaurant.helpers.EncryptMD5;
 import restaurant.helpers.JsonBuilderHelper;
 import restaurant.helpers.RandomPasswdGen;
+import restaurant.helpers.SendEmail;
 import restaurant.helpers.UserAuthenticate;
-import restaurant.mail.SendEmail;
 
 import com.sun.jersey.multipart.FormDataParam;
 
